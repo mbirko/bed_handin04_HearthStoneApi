@@ -34,7 +34,7 @@ var audienceDb = mongoClient.GetDatabase(config.HearthstoneDB.DatabaseName);
 builder.Services.TryAddSingleton(provider => audienceDb);
 
 builder.Services.AddSingleton<ICardService, CardService>();
-builder.Services.AddSingleton<IMongoRepository<Card, string>, CardsRepository>();
+builder.Services.AddSingleton<IMongoRepository<Card, int>, CardsRepository>();
 
 // Add services to the container.
 builder.Services.AddControllers();

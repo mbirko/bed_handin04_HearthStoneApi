@@ -1,10 +1,11 @@
 using Domain.Models;
 using firstMongoLib.Models;
 using MongoDB.Driver;
+using System.Linq.Expressions;
 
 namespace Hearthstone_Api.Repositories;
 
-public class CardsRepository : IMongoRepository<Card, string>
+public class CardsRepository : IMongoRepository<Card, int>
 {
     // TODO: virk på alle collections, og ikke kun cards.
     protected readonly IMongoDatabase _database;
@@ -22,10 +23,10 @@ public class CardsRepository : IMongoRepository<Card, string>
             .ToListAsync();
     }
 
-    public virtual async Task<Card?> GetAsync(string id)
+    public virtual async Task<Card> GetAsync(Expression<Func<Card, bool>> filter)
     {
         return await _database.GetCollection<Card>(collectionName)
-            .Find(x => x._id == id)
+            .Find(filter)
             .SingleOrDefaultAsync();
     }
 
@@ -34,13 +35,13 @@ public class CardsRepository : IMongoRepository<Card, string>
         await _database.GetCollection<Card>(collectionName).InsertOneAsync(card);
     }
 
-    public virtual async Task UpdateAsync(string id, Card card)
+    public virtual async Task UpdateAsync(int id, Card card)
     {
-        await _database.GetCollection<Card>(collectionName).ReplaceOneAsync(x => x._id == id, card);
+        await _database.GetCollection<Card>(collectionName).ReplaceOneAsync(x => x.Id == id, card);
     }
 
-    public virtual async Task DeleteAsync(string id)
+    public virtual async Task DeleteAsync(int id)
     {
-        await _database.GetCollection<Card>(collectionName).DeleteOneAsync(x => x._id == id);
+        await _database.GetCollection<Card>(collectionName).DeleteOneAsync(x => x.Id == id);
     }
 }

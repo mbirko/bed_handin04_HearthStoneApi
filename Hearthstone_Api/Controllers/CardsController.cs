@@ -25,14 +25,14 @@ public class CardsController : ControllerBase
     }
 
     [HttpGet("{id:required}")]
-    public async Task<ActionResult<Domain.Models.Card>> GetAsync(int id)
+    public async Task<ActionResult<Domain.Models.Card>> GetByIdAsync(int id)
     {
-        var temp = await _cardService.GetAllCards();
+        return await _cardService.GetCardById(id);
+    }
 
-        if (temp == null)
-        {
-            return NotFound();
-        }
-        return new Domain.Models.Card();
+    [HttpGet("{setId:required}")]
+    public async Task<ActionResult<Domain.Models.Card>> GetBySetIdAsync(int setId)
+    {
+        return await _cardService.GetCardById(setId);
     }
 }

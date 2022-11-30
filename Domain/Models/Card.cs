@@ -5,6 +5,7 @@ namespace Domain.Models
 {
     public class Card : ModelBase
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public int ClassId { get; set; }
         [BsonElement("cardTypeId")]

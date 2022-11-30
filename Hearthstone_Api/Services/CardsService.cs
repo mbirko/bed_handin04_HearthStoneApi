@@ -5,9 +5,9 @@ namespace Hearthstone_Api.Services;
 
 public class CardService : ICardService
 {
-    private IMongoRepository<Domain.Models.Card, string> _mongoRepository;
+    private IMongoRepository<Domain.Models.Card, int> _mongoRepository;
 
-    public CardService(IMongoRepository<Domain.Models.Card, string> mongoRepository)
+    public CardService(IMongoRepository<Domain.Models.Card, int> mongoRepository)
     {
         _mongoRepository = mongoRepository;
     }
@@ -22,5 +22,29 @@ public class CardService : ICardService
         }
 
         return cards;
+    }
+
+    public async Task<ActionResult<Domain.Models.Card>> GetCardById(int id)
+    {
+        var card = await _mongoRepository.GetAsync(x => x.Id == id);
+
+        if (card == null)
+        {
+            return new NotFoundResult();
+        }
+
+        return card;
+    }
+
+    public async Task<ActionResult<Domain.Models.Card>> GetCardBySetId(int id)
+    {
+        var card = await _mongoRepository.GetAsync(x => x.SetId == id);
+
+        if (card == null)
+        {
+            return new NotFoundResult();
+        }
+
+        return card;
     }
 }
