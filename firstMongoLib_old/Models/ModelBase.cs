@@ -5,9 +5,8 @@ namespace firstMongoLib.Models;
 
 public class ModelBase
 {
-
+    
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string _id { get; set; }
-    public int Id { get; set;  }
+    public string? id { get; set;  }
 }

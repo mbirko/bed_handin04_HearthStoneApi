@@ -1,36 +1,94 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Anne_\\Documents\\AU\\7. semester\\BED\\Assignments\\Assignment4\\Hearthstone_Api\\Hearthstone_Api.csproj": {}
+    "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/Hearthstone_Api/Hearthstone_Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Anne_\\Documents\\AU\\7. semester\\BED\\Assignments\\Assignment4\\Hearthstone_Api\\Hearthstone_Api.csproj": {
+    "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/firstMongoLib/firstMongoLib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Anne_\\Documents\\AU\\7. semester\\BED\\Assignments\\Assignment4\\Hearthstone_Api\\Hearthstone_Api.csproj",
-        "projectName": "Hearthstone_Api",
-        "projectPath": "C:\\Users\\Anne_\\Documents\\AU\\7. semester\\BED\\Assignments\\Assignment4\\Hearthstone_Api\\Hearthstone_Api.csproj",
-        "packagesPath": "C:\\Users\\Anne_\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Anne_\\Documents\\AU\\7. semester\\BED\\Assignments\\Assignment4\\Hearthstone_Api\\obj\\",
+        "projectUniqueName": "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/firstMongoLib/firstMongoLib.csproj",
+        "projectName": "firstMongoLib",
+        "projectPath": "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/firstMongoLib/firstMongoLib.csproj",
+        "packagesPath": "/Users/mathiasolsen/.nuget/packages/",
+        "outputPath": "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/firstMongoLib/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Anne_\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/mathiasolsen/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.18.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.402/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/Hearthstone_Api/Hearthstone_Api.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/Hearthstone_Api/Hearthstone_Api.csproj",
+        "projectName": "Hearthstone_Api",
+        "projectPath": "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/Hearthstone_Api/Hearthstone_Api.csproj",
+        "packagesPath": "/Users/mathiasolsen/.nuget/packages/",
+        "outputPath": "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/Hearthstone_Api/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/mathiasolsen/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/firstMongoLib/firstMongoLib.csproj": {
+                "projectPath": "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/firstMongoLib/firstMongoLib.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -67,7 +125,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.402/RuntimeIdentifierGraph.json"
         }
       }
     }

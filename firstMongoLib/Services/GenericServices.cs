@@ -1,33 +1,34 @@
 using firstMongoLib.data;
 using firstMongoLib.Models;
+using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace firstMongoLib.Services;
 
-public class GenericServices<ModelType> where ModelType : ModelBase
+public class GenericServices<ModelType> : IGenericServices<ModelType> where ModelType : ModelBase
 { 
    protected readonly IMongoCollection<ModelType> _collection;
 
-   public GenericServices(MongoDbSettings dbSettings)
+   public GenericServices(IOptions<MongoDbSettings> dbSettings)
    {
-
-      var client = new MongoClient(dbSettings.ConnectionString);
-      var mongoDatabase = client.GetDatabase(dbSettings.DatabaseName);
-      _collection = mongoDatabase.GetCollection<ModelType>(dbSettings.CollectionName);
+      var client = new MongoClient(dbSettings.Value.ConnectionString);
+      var mongoDatabase = client.GetDatabase(dbSettings.Value.DatabaseName);
+      _collection = mongoDatabase.GetCollection<ModelType>(dbSettings.Value.CollectionNames["cards"]);
       
    }
-   public virtual async Task<List<ModelType>> GetAsync() 
-      => await _collection.Find(_ => true).ToListAsync();
 
-   public virtual async Task<ModelType?> GetAsync(string id) =>
-      await _collection.Find(x => x.id == id).FirstOrDefaultAsync();
+   public virtual async Task<List<ModelType>> GetAsync()
+      => await _collection.Find(new BsonDocument()).ToListAsync();
+
+   public virtual async Task<ModelType?> GetAsync(int id) =>
+      await _collection.Find(_ => true).FirstOrDefaultAsync();
 
    public virtual async Task CreateAsync(ModelType book) =>
       await _collection.InsertOneAsync(book);
+   public virtual async Task UpdateAsync(int id, ModelType book) => 
+      await _collection.ReplaceOneAsync(x => x.Id == id, book);
    
-   public virtual async Task UpdateAsync(string id, ModelType book) => 
-      await _collection.ReplaceOneAsync(x => x.id == id, book);
-   
-   public virtual async Task DeleteAsync(string id) =>
-      await _collection.DeleteOneAsync(x => x.id == id);
+   public virtual async Task DeleteAsync(int id) =>
+      await _collection.DeleteOneAsync(x => x.Id == id);
 }

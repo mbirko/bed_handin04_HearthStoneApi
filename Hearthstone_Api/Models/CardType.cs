@@ -1,8 +1,9 @@
-﻿namespace Hearthstone_Api.Models
+﻿using firstMongoLib.Models;
+
+namespace Hearthstone_Api.Models
 {
-    public class CardType
+    public class CardType : ModelBase
     {
-        public int Id { get; set; }
         public String Name { get; set; }
     }
 }

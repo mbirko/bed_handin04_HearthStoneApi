@@ -1,10 +1,10 @@
 ﻿using System.Text.Json.Serialization;
+using firstMongoLib.Models;
 
 namespace Hearthstone_Api.Models
 {
-    public class Set
+    public class Set : ModelBase
     {
-        public int Id { get; set; }
         public String Name { get; set; }
         public String Type { get; set; }
         [JsonPropertyName("collectibleCount")]

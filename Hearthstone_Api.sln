@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hearthstone_Api", "Hearthstone_Api\Hearthstone_Api.csproj", "{A688BBDF-DE73-44E8-9608-F67556966ECC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "firstMongoApp", "firstMongoApp\firstMongoApp.csproj", "{EB0B7C1C-C0AF-4102-87D2-D842B72DCEF0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "firstMongoLib", "firstMongoLib\firstMongoLib.csproj", "{BAF665FD-B662-4D16-872F-5C7622789A9C}"
 EndProject
 Global
@@ -22,10 +20,6 @@ Global
 		{A688BBDF-DE73-44E8-9608-F67556966ECC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A688BBDF-DE73-44E8-9608-F67556966ECC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A688BBDF-DE73-44E8-9608-F67556966ECC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EB0B7C1C-C0AF-4102-87D2-D842B72DCEF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EB0B7C1C-C0AF-4102-87D2-D842B72DCEF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EB0B7C1C-C0AF-4102-87D2-D842B72DCEF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EB0B7C1C-C0AF-4102-87D2-D842B72DCEF0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BAF665FD-B662-4D16-872F-5C7622789A9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BAF665FD-B662-4D16-872F-5C7622789A9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAF665FD-B662-4D16-872F-5C7622789A9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
