@@ -1,15 +1,26 @@
-using firstMongoLib.data;
-using firstMongoLib.Services;
-using Hearthstone_Api.Data;
-using Hearthstone_Api.Models;
-using Microsoft.Extensions.Options;
+using Hearthstone_Api.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Hearthstone_Api.Services;
 
-public class CardsService : GenericServices<Card>, ICardsServices
+public class CardService : ICardService
 {
-    public CardsService(IOptions<HearthstoneDbSettings> dbSettings): base(dbSettings)
+    private IMongoRepository<Domain.Models.Card, string> _mongoRepository;
+
+    public CardService(IMongoRepository<Domain.Models.Card, string> mongoRepository)
     {
-        Console.WriteLine(dbSettings);
+        _mongoRepository = mongoRepository;
+    }
+
+    public async Task<ActionResult<List<Domain.Models.Card>>> GetAllCards()
+    {
+        var cards = await _mongoRepository.GetAsync();
+
+        if (cards == null)
+        {
+            return new List<Domain.Models.Card>();
+        }
+
+        return cards;
     }
 }

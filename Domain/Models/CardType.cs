@@ -4,6 +4,7 @@ namespace Hearthstone_Api.Models
 {
     public class CardType : ModelBase
     {
-        public String Name { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -1,16 +1,40 @@
-using Hearthstone_Api.Data;
+using Domain.Models;
+using Hearthstone_Api;
+using Hearthstone_Api.Repositories;
 using Hearthstone_Api.Services;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using MongoDB.Driver;
+
+// Dette gør du kan infer AppConfig fra appsettings
+var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+#if DEBUG
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+#else
+                .AddJsonFile("activationsecrets/appsettings.secrets.json", optional: false, reloadOnChange: false)
+                .AddJsonFile("appsecrets/appsettings.secrets.json", optional: false, reloadOnChange: false)
+
+#endif
+                .AddEnvironmentVariables()
+                .Build();
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-
 builder.Services.AddLogging();
-var temp = builder.Configuration.GetSection("HearthstoneDB");
 
-builder.Services.Configure<HearthstoneDbSettings>(temp);
+var config = configuration.Get<AppConfig>();
 
-builder.Services.AddSingleton<ICardsServices, CardsService>();
+// MongoClient
+var mongoClient = new MongoClient(config.HearthstoneDB.ConnectionString);
+builder.Services.TryAddSingleton<IMongoClient>(provider => mongoClient);
+
+// MongoDatabase
+var audienceDb = mongoClient.GetDatabase(config.HearthstoneDB.DatabaseName);
+builder.Services.TryAddSingleton(provider => audienceDb);
+
+builder.Services.AddSingleton<ICardService, CardService>();
+builder.Services.AddSingleton<IMongoRepository<Card, string>, CardsRepository>();
 
 // Add services to the container.
 builder.Services.AddControllers();

@@ -1,26 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/Hearthstone_Api/Hearthstone_Api.csproj": {}
+    "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\Hearthstone_Api\\Hearthstone_Api.csproj": {}
   },
   "projects": {
-    "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/firstMongoLib/firstMongoLib.csproj": {
+    "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/firstMongoLib/firstMongoLib.csproj",
-        "projectName": "firstMongoLib",
-        "projectPath": "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/firstMongoLib/firstMongoLib.csproj",
-        "packagesPath": "/Users/mathiasolsen/.nuget/packages/",
-        "outputPath": "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/firstMongoLib/obj/",
+        "projectUniqueName": "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\Domain\\Domain.csproj",
+        "projectName": "Domain",
+        "projectPath": "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\FrederikTræholtAnder\\.nuget\\packages\\",
+        "outputPath": "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "/Users/mathiasolsen/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\FrederikTræholtAnder\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://www.myget.org/F/raptor/auth/20d61665-f8d6-4ea8-ae7e-ec73f30c84da/api/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -38,6 +44,74 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "MongoDB.Bson": {
+              "target": "Package",
+              "version": "[2.18.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\firstMongoLib\\firstMongoLib.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\firstMongoLib\\firstMongoLib.csproj",
+        "projectName": "firstMongoLib",
+        "projectPath": "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\firstMongoLib\\firstMongoLib.csproj",
+        "packagesPath": "C:\\Users\\FrederikTræholtAnder\\.nuget\\packages\\",
+        "outputPath": "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\firstMongoLib\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\FrederikTræholtAnder\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://www.myget.org/F/raptor/auth/20d61665-f8d6-4ea8-ae7e-ec73f30c84da/api/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.Extensions.Options": {
+              "target": "Package",
+              "version": "[1.0.0-rc1-final, )"
+            },
             "MongoDB.Driver": {
               "target": "Package",
               "version": "[2.18.0, )"
@@ -49,8 +123,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -59,34 +132,43 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.402/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/Hearthstone_Api/Hearthstone_Api.csproj": {
+    "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\Hearthstone_Api\\Hearthstone_Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/Hearthstone_Api/Hearthstone_Api.csproj",
+        "projectUniqueName": "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\Hearthstone_Api\\Hearthstone_Api.csproj",
         "projectName": "Hearthstone_Api",
-        "projectPath": "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/Hearthstone_Api/Hearthstone_Api.csproj",
-        "packagesPath": "/Users/mathiasolsen/.nuget/packages/",
-        "outputPath": "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/Hearthstone_Api/obj/",
+        "projectPath": "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\Hearthstone_Api\\Hearthstone_Api.csproj",
+        "packagesPath": "C:\\Users\\FrederikTræholtAnder\\.nuget\\packages\\",
+        "outputPath": "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\Hearthstone_Api\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "/Users/mathiasolsen/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\FrederikTræholtAnder\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://www.myget.org/F/raptor/auth/20d61665-f8d6-4ea8-ae7e-ec73f30c84da/api/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/firstMongoLib/firstMongoLib.csproj": {
-                "projectPath": "/Users/mathiasolsen/Dropbox (Personal)/Uni/sem4/bed/bed_handin4_grp3_hearthstone_API/firstMongoLib/firstMongoLib.csproj"
+              "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\Domain\\Domain.csproj"
+              },
+              "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\firstMongoLib\\firstMongoLib.csproj": {
+                "projectPath": "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\firstMongoLib\\firstMongoLib.csproj"
               }
             }
           }
@@ -101,6 +183,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.Extensions.Options": {
+              "target": "Package",
+              "version": "[1.0.0-rc1-final, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
@@ -112,8 +198,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -125,7 +210,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.402/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }
