@@ -1,7 +1,24 @@
 using Hearthstone_Api.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 
 namespace Hearthstone_Api.Services;
+
+public class CardFilters
+{
+    public CardFilters(int? setId, int? classid, int? rarityid, string? artist)
+    {
+        this.setId = setId;
+        this.classid = classid;
+        this.rarityid = rarityid;
+        this.artist = artist;
+    }
+
+    public int? setId { get; set; }
+    public int? classid { get; set; }
+    public int? rarityid { get; set; }
+    public string? artist { get; set; }
+}
 
 public class CardService : ICardService
 {
@@ -12,9 +29,11 @@ public class CardService : ICardService
         _mongoRepository = mongoRepository;
     }
 
-    public async Task<ActionResult<List<Domain.Models.Card>>> GetAllCards()
+    public async Task<ActionResult<List<Domain.Models.Card>>> GetCardsByFilter(CardFilters cardFilters)
     {
-        var cards = await _mongoRepository.GetAsync();
+        var mongoFilter = CreateFilter(cardFilters);
+
+        var cards = await _mongoRepository.GetAsync(mongoFilter);
 
         if (cards == null)
         {
@@ -24,27 +43,35 @@ public class CardService : ICardService
         return cards;
     }
 
-    public async Task<ActionResult<Domain.Models.Card>> GetCardById(int id)
+    public FilterDefinition<Domain.Models.Card> CreateFilter(CardFilters cardFilters)
     {
-        var card = await _mongoRepository.GetAsync(x => x.Id == id);
+        var builder = Builders<Domain.Models.Card>.Filter;
+        var mongoFilter = builder.Empty;
 
-        if (card == null)
+        if (cardFilters.setId.HasValue)
         {
-            return new NotFoundResult();
+            var setFilter = builder.Where(x => x.SetId == cardFilters.setId.Value);
+            mongoFilter &= setFilter;
         }
 
-        return card;
-    }
-
-    public async Task<ActionResult<Domain.Models.Card>> GetCardBySetId(int id)
-    {
-        var card = await _mongoRepository.GetAsync(x => x.SetId == id);
-
-        if (card == null)
+        if (cardFilters.classid.HasValue)
         {
-            return new NotFoundResult();
+            var classFilter = builder.Where(x => x.ClassId == cardFilters.classid.Value);
+            mongoFilter &= classFilter;
         }
 
-        return card;
+        if (cardFilters.rarityid.HasValue)
+        {
+            var rarityFilter = builder.Where(x => x.RarityId == cardFilters.rarityid.Value);
+            mongoFilter &= rarityFilter;
+        }
+
+        if (!string.IsNullOrEmpty(cardFilters.artist))
+        {
+            var artistFilter = builder.Where(x => x.Artist == cardFilters.artist);
+            mongoFilter &= artistFilter;
+        }
+
+        return mongoFilter;
     }
 }

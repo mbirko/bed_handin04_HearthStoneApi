@@ -1,10 +1,13 @@
-﻿using firstMongoLib.Models;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Domain.Models
 {
-    public class Card : ModelBase
+    public class Card
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string _id { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
         public int ClassId { get; set; }

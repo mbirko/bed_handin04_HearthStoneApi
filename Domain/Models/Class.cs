@@ -1,6 +1,4 @@
-﻿using firstMongoLib.Models;
-
-namespace Hearthstone_Api.Models
+﻿namespace Hearthstone_Api.Models
 {
     public class Class
     {

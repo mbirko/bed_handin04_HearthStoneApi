@@ -1,7 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace firstMongoLib.Models;
+namespace Domain.Models;
 
 public class ModelBase
 {

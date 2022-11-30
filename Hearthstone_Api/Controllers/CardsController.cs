@@ -19,20 +19,13 @@ public class CardsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Domain.Models.Card>>> GetAsync()
+    public async Task<ActionResult<List<Domain.Models.Card>>> GetAsync(
+        [FromQuery] int? setId,
+        [FromQuery] int? classid,
+        [FromQuery] int? rarityid,
+        [FromQuery] string? artist)
     {
-        return await _cardService.GetAllCards();
-    }
-
-    [HttpGet("{id:required}")]
-    public async Task<ActionResult<Domain.Models.Card>> GetByIdAsync(int id)
-    {
-        return await _cardService.GetCardById(id);
-    }
-
-    [HttpGet("{setId:required}")]
-    public async Task<ActionResult<Domain.Models.Card>> GetBySetIdAsync(int setId)
-    {
-        return await _cardService.GetCardById(setId);
+        _logger.LogInformation($"{setId},{classid},{rarityid},{artist}");
+        return await _cardService.GetCardsByFilter(new CardFilters(setId, classid, rarityid, artist));
     }
 }
