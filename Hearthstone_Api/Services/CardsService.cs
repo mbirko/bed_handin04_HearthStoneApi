@@ -43,7 +43,7 @@ public class CardService : ICardService
         return cards;
     }
 
-    public FilterDefinition<Domain.Models.Card> CreateFilter(CardFilters cardFilters)
+    private FilterDefinition<Domain.Models.Card> CreateFilter(CardFilters cardFilters)
     {
         var builder = Builders<Domain.Models.Card>.Filter;
         var mongoFilter = builder.Empty;

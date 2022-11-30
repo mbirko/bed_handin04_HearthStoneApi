@@ -604,20 +604,6 @@
         "runtime": {
           "bin/placeholder/Domain.dll": {}
         }
-      },
-      "firstMongoLib/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "Microsoft.Extensions.Options": "1.0.0-rc1-final",
-          "MongoDB.Driver": "2.18.0"
-        },
-        "compile": {
-          "bin/placeholder/firstMongoLib.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/firstMongoLib.dll": {}
-        }
       }
     }
   },
@@ -2543,19 +2529,14 @@
       "type": "project",
       "path": "../Domain/Domain.csproj",
       "msbuildProject": "../Domain/Domain.csproj"
-    },
-    "firstMongoLib/1.0.0": {
-      "type": "project",
-      "path": "../firstMongoLib/firstMongoLib.csproj",
-      "msbuildProject": "../firstMongoLib/firstMongoLib.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
       "Domain >= 1.0.0",
       "Microsoft.Extensions.Options >= 1.0.0-rc1-final",
-      "Swashbuckle.AspNetCore >= 6.2.3",
-      "firstMongoLib >= 1.0.0"
+      "MongoDB.Driver >= 2.18.0",
+      "Swashbuckle.AspNetCore >= 6.2.3"
     ]
   },
   "packageFolders": {
@@ -2592,9 +2573,6 @@
           "projectReferences": {
             "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\Domain\\Domain.csproj": {
               "projectPath": "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\Domain\\Domain.csproj"
-            },
-            "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\firstMongoLib\\firstMongoLib.csproj": {
-              "projectPath": "C:\\src\\Raptor\\bed_handin04_HearthStoneApi\\firstMongoLib\\firstMongoLib.csproj"
             }
           }
         }
@@ -2612,6 +2590,10 @@
           "Microsoft.Extensions.Options": {
             "target": "Package",
             "version": "[1.0.0-rc1-final, )"
+          },
+          "MongoDB.Driver": {
+            "target": "Package",
+            "version": "[2.18.0, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",

@@ -1,5 +1,4 @@
 using MongoDB.Driver;
-using System.Linq.Expressions;
 
 namespace Hearthstone_Api.Repositories;
 
@@ -16,11 +15,10 @@ public class CardsRepository : IMongoRepository<Domain.Models.Card, int>
 
     public virtual async Task<List<Domain.Models.Card>> GetAsync(FilterDefinition<Domain.Models.Card> filter)
     {
-        var cards = await _database.GetCollection<Domain.Models.Card>(collectionName)
+        return await _database.GetCollection<Domain.Models.Card>(collectionName)
                 .Find(filter)
                 .ToListAsync();
 
-        return cards;
     }
 
     public virtual async Task CreateAsync(Domain.Models.Card card)
