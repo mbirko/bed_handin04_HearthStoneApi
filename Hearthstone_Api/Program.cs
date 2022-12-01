@@ -1,5 +1,7 @@
+using System.Text.Json;
 using Domain.Models;
 using Hearthstone_Api;
+using Hearthstone_Api.DTO;
 using Hearthstone_Api.Repositories;
 using Hearthstone_Api.Services;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -30,11 +32,14 @@ var mongoClient = new MongoClient(config.HearthstoneDB.ConnectionString);
 builder.Services.TryAddSingleton<IMongoClient>(provider => mongoClient);
 
 // MongoDatabase
-var audienceDb = mongoClient.GetDatabase(config.HearthstoneDB.DatabaseName);
-builder.Services.TryAddSingleton(provider => audienceDb);
+var db = mongoClient.GetDatabase(config.HearthstoneDB.DatabaseName);
+builder.Services.TryAddSingleton(provider => db);
 
 builder.Services.AddSingleton<ICardService, CardService>();
 builder.Services.AddSingleton<IMongoRepository<Card, int>, CardsRepository>();
+
+var cardJson = File.ReadAllText("Hearthstone_Api/cards.json");
+var cardsToBeAdded = JsonSerializer.Deserialize<List<CardsUploade>>(cardJson);
 
 // Add services to the container.
 builder.Services.AddControllers();
