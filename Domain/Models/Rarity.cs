@@ -1,4 +1,4 @@
-﻿using firstMongoLib.Models;
+﻿using Domain.Models;
 
 namespace Hearthstone_Api.Models
 {
