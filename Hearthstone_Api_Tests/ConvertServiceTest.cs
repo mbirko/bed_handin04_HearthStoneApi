@@ -1,18 +1,17 @@
 using Hearthstone_Api.Services;
-using Heartstone_Api_Tests;
-using NUnit.Framework;
+using Hearthstone_Api.Services.Implementations;
+// ReSharper disable RedundantAssignment
 
-
-namespace Heartstone_Api_Tests;
+namespace Hearthstone_Api_Tests;
 
 [TestFixture]
 public class ConvertServiceTest
 {
-   public IConvertService<TestModel, TestDto> uut;
+   private IConvertService<TestModel, TestDto> _uut = null!;
    [SetUp]
    public void SetUp()
    {
-      uut = new ConvertService<TestModel, TestDto>();
+      _uut = new ConvertService<TestModel, TestDto>();
    }
 
    [TearDown]
@@ -26,23 +25,23 @@ public class ConvertServiceTest
    {
       // arrange
       var modelTest = new TestModel();
-      var dtoTest = TestDto.CreateTestDTO();
+      var dtoTest = TestDto.CreateTestDto();
 
       // art
-      modelTest = uut.ToModel(dtoTest);
+      modelTest = _uut.ToModel(dtoTest);
       // assert
       Assert.That(modelTest.Data.Equals(dtoTest.Data));
    }
 
    [Test]
-   public void TestConverToDTO()
+   public void TestConvertToDto()
    {
       // arrange
       var modelTest = TestModel.CreateTestModel();
       var dtoTest = new TestDto();
 
       // art
-      dtoTest = uut.toDTO(modelTest);
+      dtoTest = _uut.ToDto(modelTest);
       // assert
       Assert.That(dtoTest.Data.Equals(modelTest.Data));
       Assert.That(dtoTest.Id.Equals(modelTest.Id));
@@ -50,7 +49,6 @@ public class ConvertServiceTest
 
    public class TestModel : Domain.Models.ModelBase<int>
    {
-      public string _id { get; set; } = null!;
       public string Data { get; set; } = null!;
 
       public static TestModel CreateTestModel()
@@ -69,7 +67,7 @@ public class ConvertServiceTest
       public int Id { get; set; }
       public string Data { get; set; } = null!;
 
-      public static TestDto CreateTestDTO()
+      public static TestDto CreateTestDto()
       {
          return new TestDto()
          {

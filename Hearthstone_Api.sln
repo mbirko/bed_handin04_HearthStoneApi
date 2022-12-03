@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hearthstone_Api", "Hearthst
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{56A9D498-1CE5-457A-AB89-5E9D61F98E5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Heartstone_Api_Tests", "Heartstone_Api_Tests\Heartstone_Api_Tests.csproj", "{4E85DDAE-EC8D-424A-B1F9-6086DEB09377}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hearthstone_Api_Tests", "Hearthstone_Api_Tests\Hearthstone_Api_Tests.csproj", "{4E85DDAE-EC8D-424A-B1F9-6086DEB09377}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

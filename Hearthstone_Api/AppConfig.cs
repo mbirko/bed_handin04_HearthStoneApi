@@ -2,10 +2,10 @@
 {
     public class AppConfig
     {
-        public HearthstoneDB HearthstoneDB { get; set; }
+        public HearthstoneDb? HearthstoneDb { get; set; }
     }
 
-    public class HearthstoneDB
+    public class HearthstoneDb
     {
         public string ConnectionString { get; set; } = null!;
         public string DatabaseName { get; set; } = null!;

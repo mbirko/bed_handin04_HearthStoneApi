@@ -1,6 +1,6 @@
 using Mapster;
 
-namespace Hearthstone_Api.Services;
+namespace Hearthstone_Api.Services.Implementations;
 
 public class ConvertService<TM, TD> : IConvertService<TM, TD>
     where TM : class, new()
@@ -13,7 +13,7 @@ public class ConvertService<TM, TD> : IConvertService<TM, TD>
         return output;
     }
 
-    public TD toDTO(TM input)
+    public TD ToDto(TM input)
     {
         TD output = new TD();
         input.Adapt(output);

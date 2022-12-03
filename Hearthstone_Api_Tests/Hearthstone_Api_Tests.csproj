@@ -6,6 +6,8 @@
     <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
+
+    <RootNamespace>Heartstone_Api_Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

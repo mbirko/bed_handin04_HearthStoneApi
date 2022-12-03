@@ -1,28 +1,26 @@
-using System.Text.Json;
 using Hearthstone_Api.Repositories;
-using Mapster;
-namespace Hearthstone_Api.Services;
+namespace Hearthstone_Api.Services.Implementations;
 
 
-public class seedService<M, D, K> 
-    where M : class, new()
-    where D : class, new()
+public class SeedService<TM, TD, TK> 
+    where TM : class, new()
+    where TD : class, new()
 {
-    private readonly IMongoRepository<M, K> _repository;
-    private readonly IConvertService<M, D> _convertService;
-    public seedService(IMongoRepository<M, K> repository, IConvertService<M, D> convertService)
+    private readonly IMongoRepository<TM, TK> _repository;
+    private readonly IConvertService<TM, TD> _convertService;
+    public SeedService(IMongoRepository<TM, TK> repository, IConvertService<TM, TD> convertService)
     {
         _repository = repository;
         _convertService = convertService;
     }
 
-    public async Task Seed(D source)
+    public async Task Seed(TD source)
     {
         var model = _convertService.ToModel(source);
         await _repository.CreateAsync(model);
     }
 
-    public async Task Seed(List<D> source)
+    public async Task Seed(List<TD> source)
     {
         foreach (var model in source)
         {

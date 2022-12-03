@@ -1,7 +1,9 @@
 using System.Text.Json;
 using Hearthstone_Api;
 using Hearthstone_Api.Repositories;
+using Hearthstone_Api.Repositories.Implementations;
 using Hearthstone_Api.Services;
+using Hearthstone_Api.Services.Implementations;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MongoDB.Driver;
 
@@ -20,11 +22,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddLogging();
 
 // MongoClient
-var mongoClient = new MongoClient(config.HearthstoneDB.ConnectionString);
+var mongoClient = new MongoClient(config.HearthstoneDb!.ConnectionString);
 builder.Services.TryAddSingleton<IMongoClient>(_ => mongoClient);
 
 // MongoDatabase
-var db = mongoClient.GetDatabase(config.HearthstoneDB.DatabaseName);
+var db = mongoClient.GetDatabase(config.HearthstoneDb.DatabaseName);
 builder.Services.TryAddSingleton(_ => db);
 
 
@@ -61,7 +63,7 @@ var cardsRepo = new CardsRepository(db);
 if (!collections.Contains(cardsRepo.ToString()))
 {
     var seedService =
-        new seedService<Domain.Models.Card, Hearthstone_Api.DTO.CardJsonModel, int>
+        new SeedService<Domain.Models.Card, Hearthstone_Api.DTO.CardJsonModel, int>
             (cardsRepo, new ConvertService<Domain.Models.Card, Hearthstone_Api.DTO.CardJsonModel>());
     var cardsString = File.ReadAllText("./cards.json");
     var cardsList = JsonSerializer.Deserialize<List<Hearthstone_Api.DTO.CardJsonModel>>(cardsString);
@@ -77,26 +79,26 @@ var classRepo = new ClassesRepository(db);
 if (!collections.Contains(classRepo.ToString()))
 {
     var classSeeder = 
-        new seedService<
+        new SeedService<
             Domain.Models.Class, 
             Hearthstone_Api.DTO.Class, 
             int>(classRepo, new ConvertService<
                 Domain.Models.Class, 
                 Hearthstone_Api.DTO.Class>());
-    await classSeeder.Seed(metaData!.Classes);
+    await classSeeder.Seed(metaData!.Classes!);
 }
 // Sets seeding 
 var setRepo = new SetsRepository(db);
 if (!collections.Contains(setRepo.ToString()))
 {
     var setSeeder = 
-        new seedService<
+        new SeedService<
             Domain.Models.Set, 
             Hearthstone_Api.DTO.Set, 
             int>(setRepo, new ConvertService<
                 Domain.Models.Set, 
                 Hearthstone_Api.DTO.Set>());
-    await setSeeder.Seed(metaData!.Sets);
+    await setSeeder.Seed(metaData!.Sets!);
 }
 
 
@@ -105,13 +107,13 @@ var raritiesRepo = new RaritiesRepository(db);
 if (!collections.Contains(raritiesRepo.ToString()))
 {
     var raritiesSeeder = 
-        new seedService<
+        new SeedService<
             Domain.Models.Rarity, 
             Hearthstone_Api.DTO.Rarity, 
             int>(raritiesRepo, new ConvertService<
                 Domain.Models.Rarity, 
                 Hearthstone_Api.DTO.Rarity>());
-    await raritiesSeeder.Seed(metaData!.Rarities);
+    await raritiesSeeder.Seed(metaData!.Rarities!);
 }
 
 
@@ -121,13 +123,13 @@ var typesRepo = new TypesRepository(db);
 if (!collections.Contains(typesRepo.ToString()))
 {
     var typesSeeder = 
-        new seedService<
+        new SeedService<
             Domain.Models.CardType, 
             Hearthstone_Api.DTO.CardType, 
             int>(typesRepo, new ConvertService<
                 Domain.Models.CardType, 
                 Hearthstone_Api.DTO.CardType>());
-    await typesSeeder.Seed(metaData!.Types);
+    await typesSeeder.Seed(metaData!.Types!);
 }
 
 // Configure the HTTP request pipeline.

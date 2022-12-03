@@ -1,6 +1,6 @@
 using Hearthstone_Api.Repositories;
 
-namespace Hearthstone_Api.Services;
+namespace Hearthstone_Api.Services.Implementations;
 
 public class TypesService : RepositoryService<Domain.Models.CardType,int>, ITypesService
 {

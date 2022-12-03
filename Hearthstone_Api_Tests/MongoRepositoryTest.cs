@@ -1,20 +1,18 @@
 using Hearthstone_Api.Repositories;
 using Hearthstone_Api.Repositories.Implementations;
-using Hearthstone_Api.Services;
 using Mongo2Go;
 using MongoDB.Driver;
-using NUnit.Framework;
 
-namespace Heartstone_Api_Tests;
+namespace Hearthstone_Api_Tests;
 
 [TestFixture]
 public class MongoRepositoryTest
 {
     
-     private static MongoDbRunner _dbRunner;
-     private static MongoClient _mongoClient;
-     private static IMongoDatabase _mongoDatabase;
-     private IMongoRepository<TestModel, int> _uut;
+     private static MongoDbRunner _dbRunner = null!;
+     private static MongoClient _mongoClient = null!;
+     private static IMongoDatabase _mongoDatabase = null!;
+     private IMongoRepository<TestModel, int> _uut = null!;
      [SetUp]
      public void Setup()
      {
@@ -125,7 +123,7 @@ public class MongoRepositoryTest
         public int Id { get; set; }
         public string Data { get; set; } = null!;
 
-        public static TestDto CreateTestDTO()
+        public static TestDto CreateTestDto()
         {
            return new TestDto()
            {

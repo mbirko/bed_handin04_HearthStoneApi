@@ -1,21 +1,21 @@
 using Hearthstone_Api.Repositories;
 using Hearthstone_Api.Repositories.Implementations;
 using Hearthstone_Api.Services;
+using Hearthstone_Api.Services.Implementations;
 using Mongo2Go;
 using MongoDB.Driver;
-using NUnit.Framework;
 
-namespace Heartstone_Api_Tests;
+namespace Hearthstone_Api_Tests;
 
 [TestFixture]
 public class SeedServiceTest
 {
-     private static MongoDbRunner _dbRunner;
-     private static MongoClient _mongoClient;
-     private static IMongoDatabase _mongoDatabase;
-     private seedService<TestModel, TestDto, int> _uut;
-     private IConvertService<TestModel, TestDto> _convertService;
-     private IMongoRepository<TestModel, int> _repository;
+     private static MongoDbRunner _dbRunner = null!;
+     private static MongoClient _mongoClient = null!;
+     private static IMongoDatabase _mongoDatabase = null!;
+     private SeedService<TestModel, TestDto, int> _uut = null!;
+     private IConvertService<TestModel, TestDto> _convertService = null!;
+     private IMongoRepository<TestModel, int> _repository = null!;
      [SetUp]
      public void Setup()
      {
@@ -25,7 +25,7 @@ public class SeedServiceTest
          _mongoDatabase = _mongoClient.GetDatabase(dbName);
          _repository = new MongoRepository<TestModel, int>(_mongoDatabase);
          _convertService = new ConvertService<TestModel, TestDto>();
-         _uut = new seedService<TestModel, TestDto, int>(_repository, _convertService);
+         _uut = new SeedService<TestModel, TestDto, int>(_repository, _convertService);
 
      }
 
@@ -40,7 +40,7 @@ public class SeedServiceTest
      [Test]
      public async Task SeedOneToDatabase()
      {
-        var dto = TestDto.CreateTestDTO();
+        var dto = TestDto.CreateTestDto();
 
         await _uut.Seed(dto);
         var result = await _repository.GetAsync();
@@ -55,13 +55,12 @@ public class SeedServiceTest
          int i;
          for (i = 0; i < 10; ++i)
          {
-            dtos.Add(TestDto.CreateTestDTO());
+            dtos.Add(TestDto.CreateTestDto());
             dtos[i].Id = i;
          }
          // Act
          await _uut.Seed(dtos);
          // Assert
-         var result= await _repository.GetAsync();
          Assert.That(await _repository.Count() == 10);
      }
 
@@ -84,7 +83,7 @@ public class SeedServiceTest
         public int Id { get; set; }
         public string Data { get; set; } = null!;
 
-        public static TestDto CreateTestDTO()
+        public static TestDto CreateTestDto()
         {
            return new TestDto()
            {

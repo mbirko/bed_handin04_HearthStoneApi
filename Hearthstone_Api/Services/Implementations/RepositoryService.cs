@@ -1,23 +1,21 @@
-using Domain.Models;
 using Hearthstone_Api.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 
-namespace Hearthstone_Api.Services;
+namespace Hearthstone_Api.Services.Implementations;
 
-public class RepositoryService<M, K> : IRepositoryService<M, K> where M : Domain.Models.ModelBase<K>
+public class RepositoryService<TM, TK> : IRepositoryService<TM, TK> where TM : Domain.Models.ModelBase<TK>
 {
-    protected readonly IMongoRepository<M, K> _repository;
+    protected readonly IMongoRepository<TM, TK> Repository;
 
-    public RepositoryService(IMongoRepository<M, K> repository)
+    public RepositoryService(IMongoRepository<TM, TK> repository)
     {
-        _repository = repository;
+        Repository = repository;
     }
     
-    public async Task<ActionResult<M>> GetById(K id)
+    public async Task<ActionResult<TM>> GetById(TK id)
     {
-        var list = await _repository.GetAsync(Builders<M>.Filter.Where(x => x.Id.Equals(id)));
+        var list = await Repository.GetAsync(Builders<TM>.Filter.Where(x => x.Id!.Equals(id)));
         if (list.Count != 1) return new NotFoundResult();
         return list[0];
     }

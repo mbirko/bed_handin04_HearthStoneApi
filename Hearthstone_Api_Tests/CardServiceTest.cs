@@ -1,23 +1,23 @@
+using Hearthstone_Api.DTO;
 using Hearthstone_Api.Repositories;
+using Hearthstone_Api.Repositories.Implementations;
 using Hearthstone_Api.Services;
 using Mongo2Go;
 using MongoDB.Driver;
-using Hearthstone_Api.DTO;
-using System.Collections.Generic;
 
-namespace Heartstone_Api_Tests
+namespace Hearthstone_Api_Tests
 {
     public class CardServiceTests
     {
         private static MongoDbRunner? _dbRunner;
         private static MongoClient? _mongoClient;
-        private static IMongoDatabase _mongoDatabase;
-        private IMongoRepository<Domain.Models.Card, int> _repository;
-        private IMongoRepository<Domain.Models.Class, int> _classRepository; 
-        private IMongoRepository<Domain.Models.CardType, int> _typesRepository; 
-        private IMongoRepository<Domain.Models.Set, int> _setsRepository; 
-        private IMongoRepository<Domain.Models.Rarity, int> _raritiesRepository;
-        private ICardService _uut;
+        private static IMongoDatabase? _mongoDatabase;
+        private IMongoRepository<Domain.Models.Card, int>? _repository;
+        private IMongoRepository<Domain.Models.Class, int>? _classRepository; 
+        private IMongoRepository<Domain.Models.CardType, int>? _typesRepository; 
+        private IMongoRepository<Domain.Models.Set, int>? _setsRepository; 
+        private IMongoRepository<Domain.Models.Rarity, int>? _raritiesRepository;
+        private ICardService? _uut;
         
         [SetUp]
         public void Setup()
@@ -42,45 +42,51 @@ namespace Heartstone_Api_Tests
         [TearDown]
         public void TearDown()
         {
-            _dbRunner.Dispose();
+            _dbRunner!.Dispose();
         }
 
         [Test]
         public async Task TestNullFilter()
         {
             // Arrange
-            var mongoRepository = new CardsRepository(_mongoDatabase);
 
             var card = CreateCard();
-            _repository.CreateAsync(card);
+            await _repository?.CreateAsync(card)!;
             // Act
 
             var filters = new CardFilters(null, null, null, null);
-            var cards = await _uut.GetCardsByFilterAsync(filters);
+            var cards = await _uut?.GetCardsByFilterAsync(filters)!;
 
             // Assert
-            Assert.That(1, Is.EqualTo(cards.Value.Count));
-            
+            if (cards.Value != null) Assert.That(cards.Value, Has.Count.EqualTo(1));
+            else throw new NullReferenceException();
         }
 
         [Test]
         public async Task TestGetById()
         {
-            List<ReturnCard> expected = await createTestData();
+            List<ReturnCard> expected = await CreateTestData();
 
-            var result = await _uut.GetReturnCardsByFilterAsync(new CardFilters(null, null, null, null));
+            var result = await _uut?.GetReturnCardsByFilterAsync(new CardFilters(null, null, null, null))!;
 
-            Assert.That(result.Value.Count, Is.EqualTo(expected.Count));
-            Assert.That(result.Value[1].Name, Is.EqualTo(expected[1].Name));
-            Assert.That(result.Value[1].Set, Is.EqualTo(expected[1].Set));
-            Assert.That(result.Value[1].Type, Is.EqualTo(expected[1].Type));
-            Assert.That(result.Value[1].Class, Is.EqualTo(expected[1].Class));
-            Assert.That(result.Value[1].Rarity, Is.EqualTo(expected[1].Rarity));
-            Assert.That(result.Value[1].Artist, Is.EqualTo(expected[1].Artist));
-            Assert.That(result.Value[1].Health, Is.EqualTo(expected[1].Health));
-            Assert.That(result.Value[1].Attack, Is.EqualTo(expected[1].Attack));
-            Assert.That(result.Value[1].FlavorText, Is.EqualTo(expected[1].FlavorText));
-            Assert.That(result.Value[1].ManaCost, Is.EqualTo(expected[1].ManaCost));
+            if (result.Value != null)
+            {
+                Assert.That(result.Value.Count, Is.EqualTo(expected.Count));
+                Assert.That(result.Value[1].Name, Is.EqualTo(expected[1].Name));
+                Assert.That(result.Value[1].Set, Is.EqualTo(expected[1].Set));
+                Assert.That(result.Value[1].Type, Is.EqualTo(expected[1].Type));
+                Assert.That(result.Value[1].Class, Is.EqualTo(expected[1].Class));
+                Assert.That(result.Value[1].Rarity, Is.EqualTo(expected[1].Rarity));
+                Assert.That(result.Value[1].Artist, Is.EqualTo(expected[1].Artist));
+                Assert.That(result.Value[1].Health, Is.EqualTo(expected[1].Health));
+                Assert.That(result.Value[1].Attack, Is.EqualTo(expected[1].Attack));
+                Assert.That(result.Value[1].FlavorText, Is.EqualTo(expected[1].FlavorText));
+                Assert.That(result.Value[1].ManaCost, Is.EqualTo(expected[1].ManaCost));
+            }
+            else
+            {
+                throw new NullReferenceException();
+            }
         }
         
 
@@ -95,7 +101,7 @@ namespace Heartstone_Api_Tests
             };
         }
 
-        private async Task<List<ReturnCard>> createTestData()
+        private async Task<List<ReturnCard>> CreateTestData()
         {
             List<Domain.Models.Card> cards = new List<Domain.Models.Card>();
             List<Domain.Models.CardType> types = new List<Domain.Models.CardType>();
@@ -143,11 +149,11 @@ namespace Heartstone_Api_Tests
                 expected[i].Rarity = rarities[i].Name = $"{i} " + rarities[i].GetType() ;
             }
 
-            await _repository.CreateManyAsync(cards);
-            await _classRepository.CreateManyAsync(classes);
-            await _setsRepository.CreateManyAsync(sets);
-            await _raritiesRepository.CreateManyAsync(rarities);
-            await _typesRepository.CreateManyAsync(types);
+            await _repository?.CreateManyAsync(cards)!;
+            await _classRepository?.CreateManyAsync(classes)!;
+            await _setsRepository?.CreateManyAsync(sets)!;
+            await _raritiesRepository?.CreateManyAsync(rarities)!;
+            await _typesRepository?.CreateManyAsync(types)!;
             return (expected);
         }
 

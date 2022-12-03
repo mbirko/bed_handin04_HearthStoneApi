@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Hearthstone_Api.Services;
 
-public interface IRepositoryService<M, K> where M : Domain.Models.ModelBase<K>
+public interface IRepositoryService<TM, in TK> where TM : Domain.Models.ModelBase<TK>
 {
-    Task<ActionResult<M>> GetById(K id);
+    Task<ActionResult<TM>> GetById(TK id);
 }

@@ -17,8 +17,9 @@ namespace Domain.Models
         public int? Attack { get; set; }
         public int ManaCost { get; set; }
         [BsonElement("artistName")]
-        public string Artist { get; set; }
-        public string Text { get; set; }
-        public string FlavorText { get; set; }
+        public string Artist { get; set; } = null!;
+
+        public string Text { get; set; } = null!;
+        public string FlavorText { get; set; } = null!;
     }
 }

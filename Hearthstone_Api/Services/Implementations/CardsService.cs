@@ -1,6 +1,6 @@
-using Domain.Models;
 using Hearthstone_Api.DTO;
 using Hearthstone_Api.Repositories;
+using Hearthstone_Api.Services.Implementations;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
@@ -46,18 +46,18 @@ public class CardService : RepositoryService<Domain.Models.Card, int>, ICardServ
     public async Task<ActionResult<List<ReturnCard>>> GetReturnCardsByFilterAsync(CardFilters cardFilter)
     {
         var cards = await GetCardsByFilterAsync(cardFilter);
-        List<ReturnCard>? returnCards = new List<ReturnCard>();
+        List<ReturnCard> returnCards = new List<ReturnCard>();
         int i = 0; 
-        foreach (var card in cards.Value)
+        foreach (var card in cards.Value!)
         {
             returnCards.Add(new ReturnCard());
             card.Adapt(returnCards[i]);
             var type = await _typesRepository.GetAsync(card.TypeId);
             returnCards[i].Type = type.Name;
-            var class_ = await _classRepository.GetAsync(card.ClassId);
-            returnCards[i].Class = class_.Name;
+            var clss = await _classRepository.GetAsync(card.ClassId);
+            returnCards[i].Class = clss.Name;
             var set = await _setsRepository.GetAsync(card.SetId);
-            returnCards[i].Set = set.Name;
+            returnCards[i].Set = set.Name ?? "no name";
             var rarity = await _raritiesRepository.GetAsync(card.RarityId);
             returnCards[i].Rarity = rarity.Name;
             i++;
@@ -70,7 +70,7 @@ public class CardService : RepositoryService<Domain.Models.Card, int>, ICardServ
     {
         var mongoFilter = CreateFilter(cardFilters);
 
-        var cards = await _repository.GetAsync(mongoFilter);
+        var cards = await Repository.GetAsync(mongoFilter);
 
         if (cards == null)
         {
@@ -80,7 +80,7 @@ public class CardService : RepositoryService<Domain.Models.Card, int>, ICardServ
         return cards;
     }
 
-    private FilterDefinition<Card>? CreateFilter(CardFilters cardFilters)
+    private FilterDefinition<Domain.Models.Card>? CreateFilter(CardFilters cardFilters)
     {
         var builder = Builders<Domain.Models.Card>.Filter;
         var mongoFilter = builder.Empty;

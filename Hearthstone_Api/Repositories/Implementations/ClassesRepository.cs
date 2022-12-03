@@ -1,7 +1,6 @@
-using Hearthstone_Api.Repositories.Implementations;
 using MongoDB.Driver;
 
-namespace Hearthstone_Api.Repositories;
+namespace Hearthstone_Api.Repositories.Implementations;
 
 public class ClassesRepository : MongoRepository<Domain.Models.Class, int>
 {

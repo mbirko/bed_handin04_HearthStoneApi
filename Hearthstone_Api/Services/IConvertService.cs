@@ -5,5 +5,5 @@ public interface IConvertService<TM, TD>
     where TD : class, new()
 {
     TM ToModel(TD input);
-    TD toDTO(TM input);
+    TD ToDto(TM input);
 }
