@@ -26,15 +26,15 @@ public class CardFilters
 
 public class CardService : RepositoryService<Domain.Models.Card, int>, ICardService
 {
-    private readonly IMongoRepository<Domain.Models.Class, int> _classRepository; 
-    private readonly IMongoRepository<Domain.Models.CardType, int> _typesRepository; 
-    private readonly IMongoRepository<Domain.Models.Set, int> _setsRepository; 
-    private readonly IMongoRepository<Domain.Models.Rarity, int> _raritiesRepository; 
+    private readonly IMongoRepository<Domain.Models.Class, int> _classRepository;
+    private readonly IMongoRepository<Domain.Models.CardType, int> _typesRepository;
+    private readonly IMongoRepository<Domain.Models.Set, int> _setsRepository;
+    private readonly IMongoRepository<Domain.Models.Rarity, int> _raritiesRepository;
     public CardService(
-        IMongoRepository<Domain.Models.Card, int> mongoRepository, 
-        IMongoRepository<Domain.Models.Class, int> classRepository, 
-        IMongoRepository<Domain.Models.CardType, int> typesRepository, 
-        IMongoRepository<Domain.Models.Set, int> setsRepository, 
+        IMongoRepository<Domain.Models.Card, int> mongoRepository,
+        IMongoRepository<Domain.Models.Class, int> classRepository,
+        IMongoRepository<Domain.Models.CardType, int> typesRepository,
+        IMongoRepository<Domain.Models.Set, int> setsRepository,
         IMongoRepository<Domain.Models.Rarity, int> raritiesRepository) : base(mongoRepository)
     {
         _classRepository = classRepository;
@@ -46,26 +46,32 @@ public class CardService : RepositoryService<Domain.Models.Card, int>, ICardServ
     public async Task<ActionResult<List<ReturnCard>>> GetReturnCardsByFilterAsync(CardFilters cardFilter)
     {
         var cards = await GetCardsByFilterAsync(cardFilter);
-        List<ReturnCard> returnCards = new List<ReturnCard>();
-        int i = 0; 
-        foreach (var card in cards.Value!)
-        {
-            returnCards.Add(new ReturnCard());
-            card.Adapt(returnCards[i]);
-            var type = await _typesRepository.GetAsync(card.TypeId);
-            returnCards[i].Type = type.Name;
-            var clss = await _classRepository.GetAsync(card.ClassId);
-            returnCards[i].Class = clss.Name;
-            var set = await _setsRepository.GetAsync(card.SetId);
-            returnCards[i].Set = set.Name ?? "no name";
-            var rarity = await _raritiesRepository.GetAsync(card.RarityId);
-            returnCards[i].Rarity = rarity.Name;
-            i++;
-        }
 
-        return returnCards;
+        var result = cards.Value!.Select(card => adaptCardToReturnCard(card));
+
+        var returnCards = await Task.WhenAll(result);
+
+        return returnCards.ToList();
 
     }
+
+    private async Task<ReturnCard> adaptCardToReturnCard(Domain.Models.Card card)
+    {
+        var returnCard = card.Adapt<ReturnCard>();
+
+        var type = await _typesRepository.GetAsync(card.TypeId);
+        var @class = await _classRepository.GetAsync(card.ClassId);
+        var set = await _setsRepository.GetAsync(card.SetId);
+        var rarity = await _raritiesRepository.GetAsync(card.RarityId);
+
+        returnCard.Type = type.Name;
+        returnCard.Class = @class.Name;
+        returnCard.Set = set.Name;
+        returnCard.Rarity = rarity.Name;
+
+        return returnCard;
+    }
+
     public async Task<ActionResult<List<Domain.Models.Card>>> GetCardsByFilterAsync(CardFilters cardFilters)
     {
         var mongoFilter = CreateFilter(cardFilters);
