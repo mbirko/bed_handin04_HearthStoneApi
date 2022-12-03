@@ -1,15 +1,11 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson.Serialization.Attributes;
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 namespace Domain.Models
 {
-    public class Card
+    public class Card : ModelBase<int>
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string _id { get; set; }
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
         public int ClassId { get; set; }
         [BsonElement("cardTypeId")]
         public int TypeId { get; set; }

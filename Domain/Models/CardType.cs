@@ -1,10 +1,8 @@
-﻿using Domain.Models;
-
-namespace Hearthstone_Api.Models
+﻿
+namespace Domain.Models
 {
-    public class CardType : ModelBase
+    public class CardType : ModelBase<int>
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
     }
 }

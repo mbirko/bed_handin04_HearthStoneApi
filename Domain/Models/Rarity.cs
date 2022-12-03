@@ -1,9 +1,8 @@
-﻿using Domain.Models;
-
-namespace Hearthstone_Api.Models
+﻿
+namespace Domain.Models
 {
-    public class Rarity : ModelBase
+    public class Rarity : ModelBase<int>
     {
-        public String Name { get; set; }
+        public String Name { get; set; } = null!;
     }
 }

@@ -1,3 +1,4 @@
+using Hearthstone_Api.DTO;
 using Hearthstone_Api.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,24 +9,27 @@ namespace Hearthstone_Api.Controllers;
 public class CardsController : ControllerBase
 {
 
-    private ILogger<CardsController> _logger;
+    private readonly ILogger<CardsController> _logger;
 
     private readonly ICardService _cardService;
-
-    public CardsController(ILogger<CardsController> logger, ICardService cardsService)
+    
+    public CardsController(
+        ILogger<CardsController> logger, 
+        ICardService cardsService)
     {
         _logger = logger;
         _cardService = cardsService;
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Domain.Models.Card>>> GetAsync(
+    public async Task<ActionResult<List<ReturnCard>>> GetAsync(
+        [FromQuery] int? page,
         [FromQuery] int? setId,
-        [FromQuery] int? classid,
-        [FromQuery] int? rarityid,
+        [FromQuery] int? classId,
+        [FromQuery] int? rarityId,
         [FromQuery] string? artist)
     {
-        _logger.LogInformation($"{setId},{classid},{rarityid},{artist}");
-        return await _cardService.GetCardsByFilter(new CardFilters(setId, classid, rarityid, artist));
+        _logger.LogInformation("{Page}, {Id},{ClassId},{RarityId},{Artist}", page, setId, classId, rarityId, artist);
+        return await _cardService.GetReturnCardsByFilterAsync(new CardFilters(setId, classId, rarityId, artist));
     }
 }

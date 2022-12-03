@@ -1,12 +1,11 @@
 ﻿using System.Text.Json.Serialization;
-using Domain.Models;
 
-namespace Hearthstone_Api.Models
+namespace Domain.Models
 {
-    public class Set : ModelBase
+    public class Set : ModelBase<int>
     {
-        public String Name { get; set; }
-        public String Type { get; set; }
+        public String Name { get; set; } = null!;
+        public String Type { get; set; } = null!;
         [JsonPropertyName("collectibleCount")]
         public int CardCount { get; set; }
     }
