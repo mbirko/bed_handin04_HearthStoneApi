@@ -64,10 +64,10 @@ public class CardService : RepositoryService<Domain.Models.Card, int>, ICardServ
         var set = await _setsRepository.GetAsync(card.SetId);
         var rarity = await _raritiesRepository.GetAsync(card.RarityId);
 
-        returnCard.Type = type.Name;
-        returnCard.Class = @class.Name;
-        returnCard.Set = set.Name;
-        returnCard.Rarity = rarity.Name;
+        returnCard.Type = type?.Name ?? "";
+        returnCard.Class = @class?.Name ?? "";
+        returnCard.Set = set?.Name ?? "";
+        returnCard.Rarity = rarity?.Name ?? "";
 
         return returnCard;
     }
